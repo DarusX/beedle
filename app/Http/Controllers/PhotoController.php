@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Photo;
 
 class PhotoController extends Controller
 {
@@ -34,7 +35,11 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Photo::create([
+            'product_id' => $request->product_id,
+            'photo' => $request->file('photo')->store('photos')
+        ]);
+        return redirect()->back();
     }
 
     /**

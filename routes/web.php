@@ -11,6 +11,8 @@
 |
 */
 Route::get('/marcas/{brand}', 'PublicController@brand');
+Route::get('/categorias/{category}', 'PublicController@category');
+
 Route::prefix('json')->group(function(){
     Route::prefix('category')->group(function(){
         Route::get('all', 'ResourceController@categories')->name('category.json.all');
@@ -22,7 +24,9 @@ Route::prefix('json')->group(function(){
 Route::resources([
     'category' => 'CategoryController',
     'brand' => 'BrandController',
-    'product' => 'ProductController'
+    'product' => 'ProductController',
+    'photo' => 'PhotoController',
+    'color' => 'ColorController'
 ]);
 
 Route::get('/', function () {

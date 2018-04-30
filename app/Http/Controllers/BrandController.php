@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Brand;
 
@@ -91,6 +92,10 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        Brand::destroy($id);
+        try{
+            Brand::destroy($id);
+        } catch(QueryException $e){
+            abort(500, $e->getMessage());
+        }
     }
 }

@@ -29,8 +29,11 @@ $(document).ready(function(){
     }
     $(".destroy").click(function(){
         event.preventDefault();
-        $.post($(this).attr("href")).done(function(){
-            location.reload();
+        $.post($(this).attr("href"), {
+            _method: "DELETE"
+        }).done(function(data){
+        }).catch(function(){
+            toastr.error("Error");
         })
     })
 })

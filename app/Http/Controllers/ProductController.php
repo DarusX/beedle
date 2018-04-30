@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Category;
 use App\Brand;
+use App\Color;
 
 class ProductController extends Controller
 {
@@ -75,7 +76,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('product.edit')->with([
+            'product' => Product::find($id),
+            'categories' => Category::select('id', 'category')->get(),
+            'brands' => Brand::select('id', 'brand')->get(),
+            'colors' => Color::select('id', 'color', 'hcolor')->get(),
+        ]);
     }
 
     /**
@@ -87,7 +93,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Product::find($id)->update($request->all());
+        return redirect()->back();
     }
 
     /**
