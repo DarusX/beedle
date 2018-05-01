@@ -68,14 +68,22 @@
 </div>
 <div class="col-sm-4">
     <h2>Colores</h2>
-    <form action="" method="post">
-        @foreach($colors as $c)
-        <div class="checkbox">
-            <label for="">
-                <input type="checkbox" name="color_id[]" value="$c->id">{{$c->color}}
-            </label>
+    <form action="{{route('product.colors', $product->id)}}" method="post">
+        <div class="form-group">
+
+            {{csrf_field()}}
+            <input type="hidden" name="id" value="{{$product->id}}">
+            @foreach($colors as $c)
+            <div class="checkbox">
+                <label for="">
+                    <input type="checkbox" name="color_id[]" value="{{$c->id}}" {{($product->colors->contains($c->id)? 'checked':'')}}>{{$c->color}}
+                </label>
+            </div>
+            @endforeach
         </div>
-        @endforeach
+        <div class="form-group">
+            <button class="btn btn-default">Aceptar</button>
+        </div>
     </form>
 </div>
 @endsection

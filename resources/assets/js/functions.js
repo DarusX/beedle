@@ -32,6 +32,7 @@ $(document).ready(function(){
         $.post($(this).attr("href"), {
             _method: "DELETE"
         }).done(function(data){
+            location.reload();
         }).catch(function(){
             toastr.error("Error");
         })

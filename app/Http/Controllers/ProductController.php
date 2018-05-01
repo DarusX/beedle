@@ -107,4 +107,8 @@ class ProductController extends Controller
     {
         //
     }
+    public function colors(Request $request, $id)
+    {
+        Product::find($id)->colors()->sync($request->color_id);
+    }
 }

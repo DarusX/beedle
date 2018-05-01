@@ -1882,7 +1882,9 @@ $(document).ready(function () {
         event.preventDefault();
         $.post($(this).attr("href"), {
             _method: "DELETE"
-        }).done(function (data) {}).catch(function () {
+        }).done(function (data) {
+            location.reload();
+        }).catch(function () {
             toastr.error("Error");
         });
     });

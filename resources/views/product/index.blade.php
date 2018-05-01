@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="col-sm-12">
-    <h1><strong>Productos</strong></h1>
+    <h1><strong>Categorías</strong></h1>
     <table class="table">
         <thead>
             <tr>
@@ -11,9 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $p)
+            @foreach($categories as $c)
             <tr>
-                <td>{{$p->product}}</td>
+                <td>{{$c->category}}</td>
                 <td></td>
                 <td></td>
             </tr>
