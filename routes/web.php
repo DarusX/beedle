@@ -15,9 +15,9 @@ Route::get('/categorias/{category}', 'PublicController@category')->name('categor
 Route::get('/articulo/{id}', 'PublicController@product')->name('producto');
 
 Route::prefix('/cliente')->group(function(){
-    Route::get('/carrito', 'BuyerController@cart')->name('cart');
-    Route::post('/cart/add', 'BuyerController@addToCart')->name('buyer.add_to_cart');
-    Route::delete('/cart/{id}/remove', 'BuyerController@removeFromCart')->name('buyer.remove_from_cart');
+    Route::get('/carrito', 'BuyerController@cart')->name('client.cart');
+    Route::post('/cart/add', 'BuyerController@addToCart')->name('client.add');
+    Route::delete('/cart/{id}/remove', 'BuyerController@removeFromCart')->name('client.remove');
 });
 
 Route::prefix('json')->group(function(){
@@ -26,6 +26,10 @@ Route::prefix('json')->group(function(){
     });
     Route::prefix('brand')->group(function(){
         Route::get('all', 'ResourceController@brands')->name('brand.json.all');
+    });
+    Route::prefix('state')->group(function(){
+        Route::get('all', 'ResourceController@states')->name('state.json.all');
+        Route::get('{id}', 'ResourceController@municipalities')->name('state.json');
     });
 });
 
@@ -38,7 +42,8 @@ Route::resources([
     'brand' => 'BrandController',
     'product' => 'ProductController',
     'photo' => 'PhotoController',
-    'color' => 'ColorController'
+    'color' => 'ColorController',
+    'state' => 'StateController'
 ]);
 
 Route::get('/', function () {

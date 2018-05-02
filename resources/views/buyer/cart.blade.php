@@ -25,7 +25,7 @@
         <tbody>
             @foreach(Auth::user()->carts as $cart)
             <tr>
-                <td class="text-center"><a href="{{route('buyer.remove_from_cart', $cart->id)}}" class="destroy"><i class="fas fa-trash"></i></a></td>
+                <td class="text-center"><a href="{{route('client.remove', $cart->id)}}" class="destroy"><i class="fas fa-trash"></i></a></td>
                 <td>{{$cart->product->product}} - {{$cart->color->color}}</td>
                 <td>{{$cart->quantity}}</td>
                 <td>{{number_format($cart->product->price, 2)}}</td>
@@ -34,5 +34,6 @@
             @endforeach
         </tbody>
     </table>
+    <purchase></purchase>
 </div>
 @endsection

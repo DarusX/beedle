@@ -7,6 +7,7 @@ window.Vue = require('vue');
  */
 $(document).ready(function(){
     Vue.component("navbar-links", require("./components/Navbar.vue"))
+    Vue.component("purchase", require("./components/Purchase.vue"))
     
     const app = new Vue({
         el: '#app'
