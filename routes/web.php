@@ -18,6 +18,7 @@ Route::prefix('/cliente')->group(function(){
     Route::get('/carrito', 'BuyerController@cart')->name('client.cart');
     Route::post('/cart/add', 'BuyerController@addToCart')->name('client.add');
     Route::delete('/cart/{id}/remove', 'BuyerController@removeFromCart')->name('client.remove');
+    Route::get('/generate/payment', 'BuyerController@generatePayment')->name('client.generate.payment');
 });
 
 Route::prefix('json')->group(function(){
