@@ -6,8 +6,9 @@
 @foreach($brand->products as $product)
 <div class="col-sm-3">
     <h3>{{$product->product}}</h3>
-    <img src="{{asset($product->photos->first()->photo)}}" alt="" class="img-responsive thumbnail">
-    <a href="{{route('producto', $product->id)}}" class="btn btn-default pull-right"><i class="fas fa-cart-plus"></i> <strong>{{number_format($product->price, 2)}}</strong></a>
+    <a href="{{route('producto', $product->id)}}">
+        <img src="{{asset($product->photos->first()->photo)}}" alt="" class="img-responsive thumbnail">
+    </a>
 </div>
 @endforeach
 @endsection
