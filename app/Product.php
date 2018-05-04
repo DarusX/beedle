@@ -23,4 +23,8 @@ class Product extends Model
     {
         return $this->belongsToMany(Color::class);
     }
+    public function deal()
+    {
+        return $this->hasMany(Deal::class);
+    }
 }

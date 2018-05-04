@@ -44,7 +44,8 @@ Route::resources([
     'product' => 'ProductController',
     'photo' => 'PhotoController',
     'color' => 'ColorController',
-    'state' => 'StateController'
+    'state' => 'StateController',
+    'deal' => 'DealController'
 ]);
 
 Route::get('/', function () {

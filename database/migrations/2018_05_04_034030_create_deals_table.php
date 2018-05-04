@@ -16,9 +16,10 @@ class CreateDealsTable extends Migration
         Schema::create('deals', function (Blueprint $table) {
             $table->increments('id');
             $table->string('deal');
-            $table->integer('product_id')->unsigned();
+            $table->string('code')->nullable();
             $table->integer('quantity');
             $table->date('expiration');
+            $table->integer('product_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');
