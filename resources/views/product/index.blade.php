@@ -1,19 +1,21 @@
 @extends('layouts.app')
 @section('content')
 <div class="col-sm-12">
-    <h1><strong>Categorías</strong></h1>
+    <h1><strong>Productos</strong></h1>
     <table class="table">
         <thead>
             <tr>
-                <th>Categoría</th>
+                <th>Producto</th>
+                <th>Disponible</th>
+                <th>Visible</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($categories as $c)
+            @foreach($products as $p)
             <tr>
-                <td>{{$c->category}}</td>
+                <td>{{$p->product}}</td>
                 <td></td>
                 <td></td>
             </tr>

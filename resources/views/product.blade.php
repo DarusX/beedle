@@ -8,7 +8,6 @@
 </div>
 <div class="col-sm-6">
     <div class="owl-carousel owl-theme">
-
         @foreach($product->photos as $p)
         <div class="item">
             <img src="{{asset($p->photo)}}" alt="..." class="img-responsive">
@@ -17,6 +16,7 @@
     </div>
 </div>
 <div class="col-sm-6">
+    <label for="">Descripcion</label>
     {!!$product->description!!}
     <form action="{{route('client.add')}}" method="post">
         {{csrf_field()}}
@@ -24,9 +24,9 @@
         <div class="form-group">
             <label for="">Color</label>
             @foreach($product->colors as $c)
-            <div class="checkbox">
+            <div class="radio">
                 <label for="">
-                    <input type="checkbox" name="color_id" value="{{$c->id}}">{{$c->color}}
+                    <input type="radio" name="color_id" value="{{$c->id}}">{{$c->color}}
                 </label>
             </div>
             @endforeach
@@ -46,7 +46,6 @@
     $('.owl-carousel').owlCarousel({
         loop: true,
         margin: 10,
-        nav: true,
         responsive: {
             0: {
                 items: 1

@@ -11,7 +11,7 @@ use App\Cart;
 use App\User;
 use Conekta\Conekta;
 
-class BuyerController extends Controller
+class ClientController extends Controller
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class BuyerController extends Controller
     public function addToCart(Request $request)
     {
         Auth::user()->carts()->create($request->all());
-        return redirect()->route('carrito');
+        return redirect()->route('client.cart');
     }
     public function removeFromCart($id)
     {
@@ -28,7 +28,7 @@ class BuyerController extends Controller
     }
     public function cart()
     {
-        return view('buyer.cart');
+        return view('client.cart');
     }
     public function generatePayment()
     {
@@ -77,7 +77,7 @@ class BuyerController extends Controller
           } catch (\Conekta\Handler $error){
             echo $error->getMessage();
           }
-          return view('buyer.payment')->with([
+          return view('client.payment')->with([
               'order' => $order
           ]);
     }

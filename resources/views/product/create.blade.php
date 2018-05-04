@@ -37,3 +37,9 @@
     </form>
 </div>
 @endsection
+@section('scripts')
+<script src="//cdn.ckeditor.com/4.9.2/basic/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace("description");
+</script>
+@endsection

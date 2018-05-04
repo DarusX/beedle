@@ -7,7 +7,7 @@
 <div class="col-sm-3">
     <h3>{{$product->product}}</h3>
     <a href="{{route('producto', $product->id)}}">
-        <img src="{{asset($product->photos->first()->photo)}}" alt="" class="img-responsive thumbnail">
+        <img src="{{asset($product->photos[0]->photo)}}" alt="" class="img-responsive thumbnail">
     </a>
 </div>
 @endforeach

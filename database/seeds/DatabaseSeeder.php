@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\State;
+use App\Color;
+use App\Brand;
+use App\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +16,23 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-
+        $colors = [
+            ['color' => 'Rojo'],
+            ['color' => 'Rosa'],
+            ['color' => 'Dorado'],
+            ['color' => 'Negro'],
+            ['color' => 'Plateado'],
+            ['color' => 'Gris'],
+        ];
+        foreach ($colors as $color) {
+            Color::create($color);
+        }
+        Brand::create([
+            'brand' => 'tu case'
+        ]);
+        Category::create([
+            'category' => 'Fundas' 
+        ]);
         State::create([
            'state' => 'Aguascalientes'
         ])->municipalities()->createMany([

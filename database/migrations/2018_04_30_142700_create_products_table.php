@@ -18,7 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('product');
             $table->string('description');
             $table->double('price');
-            $table->boolean('active')->default(true);
+            $table->boolean('visible')->default(true);
+            $table->boolean('available')->default(true);
             $table->integer('category_id')->unsigned();
             $table->integer('brand_id')->unsigned();
             $table->timestamps();
