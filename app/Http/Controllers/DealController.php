@@ -17,7 +17,9 @@ class DealController extends Controller
      */
     public function index()
     {
-        //
+        return view('deal.index')->with([
+            'deals' => Deal::all()
+        ]);
     }
 
     /**
@@ -42,7 +44,7 @@ class DealController extends Controller
     public function store(Request $request)
     {
         $deal = Product::create($request->all())->deal()->create($request->all());
-        return redirect()->route('product.edit', $deal->id);
+        return redirect()->route('product.edit', $deal->product->id);
     }
 
     /**

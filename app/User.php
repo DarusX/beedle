@@ -27,7 +27,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function roles()
+    public function getFullNameAttribute()
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
+    public function role()
     {
         return $this->belongsTo(Role::class);
     }

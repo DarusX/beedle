@@ -19,13 +19,10 @@
 </head>
 
 <body>
-    <div class="" id="app">
-
-        @include('layouts.navbar')
-        <div class="container">
-            <div class="row">
-                @yield('content')
-            </div>
+    @include('layouts.navbar')
+    <div class="container">
+        <div class="row">
+            @yield('content')
         </div>
     </div>
 

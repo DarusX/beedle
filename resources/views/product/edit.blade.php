@@ -42,6 +42,44 @@
     </form>
 </div>
 <div class="col-sm-4">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Opciones</h2>
+            <form action="{{route('product.update', $product->id)}}" method="post">
+                {{csrf_field()}}
+                {{method_field('PUT')}}
+                <div class="form-group">
+                    <label for="">Disponible</label>
+                    <div class="radio">
+                        <label for="">
+                            <input type="radio" name="available" value="true" {{(($product->available) ? 'checked':'')}}>Sí
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="">
+                            <input type="radio" name="available" value="false" {{((!$product->available) ? 'checked':'')}}>No
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Visible</label>
+                    <div class="radio">
+                        <label for="">
+                            <input type="radio" name="visible" value="true" {{(($product->visible) ? 'checked':'')}}>Sí
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="">
+                            <input type="radio" name="visible" value="false" {{((!$product->visible) ? 'checked':'')}}>No
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Aceptar</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <h2>Fotos</h2>
     <form action="{{route('photo.store')}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
@@ -55,10 +93,13 @@
         </div>
     </form>
     <div class="row">
-        @foreach($product->photos->chunk(3) as $chunk)
+        @foreach($product->photos->chunk(2) as $chunk)
             @foreach($chunk as $photo)
             <div class="col-sm-6">
-                <img src="{{asset($photo->photo)}}" alt="" class="img-responsive thumbnail">
+                <img src="{{asset($photo->photo)}}" alt="" class="img-responsive img-thumbnail">
+                <a href="{{route('photo.destroy', $photo->id)}}" class="btn btn-danger btn-xs btn-block">
+                    <i class="fas fa-trash"></i>
+                </a>
             </div>
             @endforeach
             <div class="col-sm-12">
@@ -70,8 +111,8 @@
     <h2>Colores</h2>
     <form action="{{route('product.colors', $product->id)}}" method="post">
         <div class="form-group">
-
             {{csrf_field()}}
+
             <input type="hidden" name="id" value="{{$product->id}}">
             @foreach($colors as $c)
             <div class="checkbox">

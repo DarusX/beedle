@@ -32,46 +32,45 @@ class ClientController extends Controller
     }
     public function generatePayment()
     {
+        $products = array();
+        $user = Auth::user();
+        foreach (Auth::user()->carts as $cart) {
+            array_push($products, [
+                'name' => $cart->product->product . ' - ' . $cart->color->color,
+                'unit_price' => $cart->product->price * 100,
+                'quantity' => $cart->quantity
+            ]);
+        }
         Conekta::setApiKey("key_tKqskNzUHpQjoszXtcWAzw");
         Conekta::setApiVersion("2.0.0");
-        try{
-            $order = \Conekta\Order::create(
-              array(
-                "line_items" => array(
-                  array(
-                    "name" => "Tacos",
-                    "unit_price" => 29900,
-                    "quantity" => 1
-                  )//first line_item
-                ), //line_items
-                "shipping_lines" => array(
-                  array(
-                    "amount" => 0,
-                    "carrier" => "FEDEX"
-                  )
-                ), //shipping_lines - physical goods only
-                "currency" => "MXN",
-                "customer_info" => array(
-                  "name" => "Fulanito Pérez",
-                  "email" => "fulanito@conekta.com",
-                  "phone" => "+5218181818181"
-                ), //customer_info
-                "shipping_contact" => array(
-                  "address" => array(
-                    "street1" => "Calle 123, int 2",
-                    "postal_code" => "06100",
-                    "country" => "MX"
-                  )//address
-                ), //shipping_contact - required only for physical goods
-                "charges" => array(
-                    array(
-                        "payment_method" => array(
-                          "type" => "oxxo_cash"
-                        )//payment_method
-                    ) //first charge
-                ) //charges
-              )//order
-            );
+
+        try {
+            $order = \Conekta\Order::create([
+                'line_items' => $products,
+                'shipping_lines' => [[
+                    'amount' => 0,
+                    'carrier' => 'FEDEX'
+                ]],
+                'currency' => 'MXN',
+                'customer_info' => [
+                    'name' => $user->fullName,
+                    'email' => $user->email,
+                    'phone' => '+5218181818181'
+    
+                ],
+                'shipping_contact' => [
+                    'address' => [
+                        'street1' => 'Calle Falsa 123',
+                        'postal_code' => '86000',
+                        'country' => 'MX'
+                    ],
+                ],
+                'charges' => [[
+                    'payment_method' => [
+                        'type' => 'oxxo_cash'
+                    ]
+                ]]
+            ]);
           } catch (\Conekta\ParameterValidationError $error){
             echo $error->getMessage();
           } catch (\Conekta\Handler $error){

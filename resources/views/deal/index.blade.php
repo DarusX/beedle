@@ -1,23 +1,24 @@
 @extends('layouts.app')
 @section('content')
 <div class="col-sm-12">
-    <h1><strong>Productos</strong></h1>
+    <h1><strong>Ofertas</strong></h1>
     <table class="table">
         <thead>
             <tr>
+                <th>Oferta</th>
                 <th>Producto</th>
-                <th>Disponible</th>
-                <th>Visible</th>
-                <th>Editar</th>
-                <th>Eliminar</th>
+                <th>Código</th>
+                <th>Expiración</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $p)
+            @foreach($deals as $d)
             <tr>
-                <td>{{$p->product}}</td>
-                <td></td>
-                <td></td>
+                <td>{{$d->deal}}</td>
+                <td>{{$d->product->product}}</td>
+                <td>{{$d->code}}</td>
+                <td>{{$d->expiration}}</td>
             </tr>
             @endforeach 
         </tbody>
