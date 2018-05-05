@@ -22,6 +22,10 @@ $(document).ready(function(){
             toastr.error("Error");
         })
     })
+    $("#coupon-link").click(function(){
+        event.preventDefault();
+        $("#modal-coupon").modal("toggle");
+    })
     $.get("/json/category/all").done(function(data){
         data.forEach(category => {
             $("#categories-menu").append("<a>" + category.category + "</a>");
