@@ -67,7 +67,7 @@
                     <strong>En el podrás verificar que se haya realizado correctamente.</strong> Conserva este comprobante de pago.</li>
             </ol>
             <div class="opps-footnote">Al completar estos pasos recibirás un correo de
-                <strong>Nombre del negocio</strong> confirmando tu pago.</div>
+                <strong>Webby</strong> confirmando tu pago.</div>
         </div>
     </div>
 </body>

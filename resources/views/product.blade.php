@@ -22,11 +22,11 @@
         {{csrf_field()}}
         <input type="hidden" name="product_id" value="{{$product->id}}">
         <div class="form-group">
-            <label for="">Color</label>
+            <label for="">Color</label><br>
             @foreach($product->colors as $c)
             <div class="radio">
                 <label for="">
-                    <input type="radio" name="color_id" value="{{$c->id}}">{{$c->color}}
+                    <input type="radio" name="color_id" value="{{$c->id}}"><span>{{$c->color}}</span>
                 </label>
             </div>
             @endforeach
