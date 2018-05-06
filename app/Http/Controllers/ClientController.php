@@ -10,6 +10,7 @@ use Auth;
 use App\Cart;
 use App\User;
 use Conekta\Conekta;
+use App\Deal;
 
 class ClientController extends Controller
 {
@@ -19,6 +20,11 @@ class ClientController extends Controller
     }
     public function addToCart(Request $request)
     {
+        $this->validate($request, [
+            'product_id' => 'required',
+            'color_id' => 'required',
+            'quantity' => 'required',
+        ]);
         Auth::user()->carts()->create($request->all());
         return redirect()->route('client.cart');
     }
@@ -30,9 +36,15 @@ class ClientController extends Controller
     {
         return view('client.cart');
     }
-    public function generatePayment()
+    public function validateCode(Request $request)
     {
-        $products = array();
+        return Deal::with(['product' => function($x){
+            $x->with('colors');
+        }])->where('code', $request->code)->first();
+    }
+    public function generatePayment(Request $request)
+    {
+        $products = [];
         $user = Auth::user();
         foreach (Auth::user()->carts as $cart) {
             array_push($products, [
@@ -71,13 +83,13 @@ class ClientController extends Controller
                     ]
                 ]]
             ]);
+            return view('client.payment')->with([
+                'order' => $order
+            ]);
           } catch (\Conekta\ParameterValidationError $error){
             echo $error->getMessage();
           } catch (\Conekta\Handler $error){
             echo $error->getMessage();
           }
-          return view('client.payment')->with([
-              'order' => $order
-          ]);
     }
 }

@@ -12,7 +12,11 @@ class PublicController extends Controller
     public function brand($brand)
     {
         return view('brand')->with([
-            'brand' => Brand::with('products.photos')->where('brand', $brand)->first()
+            'brand' => Brand::with(['products' => function($query){
+                $query->with(['photos' => function($query){
+                    $query->first();
+                }])->where('visible', true);
+            }])->where('brand', $brand)->first()
         ]);
     }
     public function category($category)

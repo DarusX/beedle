@@ -51,10 +51,11 @@
                 <li>
                     <a href="{{ route('register') }}">Register</a>
                 </li>
-                @else
-                @if(Auth::user()->carts->count() > 0)
+                @else @if(Auth::user()->carts->count() > 0)
                 <li>
-                    <a href="{{route('client.cart')}}"><i class="fas fa-shopping-cart"></i></a>
+                    <a href="{{route('client.cart')}}">
+                        <i class="fas fa-shopping-cart"></i>
+                    </a>
                 </li>
                 @endif
                 <li class="dropdown">
@@ -64,9 +65,10 @@
                     </a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a href="#" id="logout">
-                                Logout
-                            </a>
+                            <a href="#" id="logout">Logout</a>
+                        </li>
+                        <li>
+                            <a href="{{route('home')}}">Perfil</a>
                         </li>
                         <li>
                             <a href="#" id="coupon-link">Añadir Cupón</a>
@@ -81,25 +83,56 @@
 @if(!Auth::guest())
 <div class="modal fade" id="modal-coupon" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" >Añadir Cupón</h4>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Añadir Cupón</h4>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post" id="form-deal-code">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label for="">Código</label>
+                        <input type="text" name="code" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="validateCode()">Aceptar</button>
+            </div>
         </div>
-        <div class="modal-body">
-            <form action="" method="post">
-                {{csrf_field()}}
-                <div class="form-group">
-                    <label for="">Código</label>
-                    <input type="text" name="code" class="form-control">
-                </div>
-            </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Aceptar</button>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+<div class="modal fade" id="modal-select-color" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Seleccionar color</h4>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('client.add')}}" method="post" id="form-add-product">
+                    {{csrf_field()}}
+                    <div class="form-group">
+                        <label for="">Producto</label>
+                        <input type="text" id="producto" class="form-control" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Cantidad</label>
+                        <input type="text" id="quantity" name="quantity" class="form-control" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" onclick="validateCode()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endif

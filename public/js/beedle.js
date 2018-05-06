@@ -38,4 +38,26 @@ $(document).ready(function(){
             $("#brands-menu a").last().attr("href", "/marcas/" + brand.brand)
         });
     })
-})
+});
+function validateCode(){
+    $.ajax({
+        url: "/cliente/deal/validate",
+        method: "POST",
+        data: $("#form-deal-code").serialize(),
+        success: function(data){
+            if (data=="") {
+                toastr.error("Cupón invalido")
+            } else {
+                $("#modal-coupon").modal("toggle")
+                modalSelectColor(data)
+
+            }
+        }
+    })
+}
+function modalSelectColor(data){
+    $("#modal-select-color").modal("toggle")
+    $("#form-add-product").find("#producto").attr("value", data.product.product)
+    $("#form-add-product").find("#quantity").attr("value", data.quantity)
+    alert(JSON.stringify(data))
+}

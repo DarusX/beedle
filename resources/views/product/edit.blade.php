@@ -52,12 +52,12 @@
                     <label for="">Disponible</label>
                     <div class="radio">
                         <label for="">
-                            <input type="radio" name="available" value="true" {{(($product->available) ? 'checked':'')}}>Sí
+                            <input type="radio" name="available" value="1" {{(($product->available) ? 'checked':'')}}>Sí
                         </label>
                     </div>
                     <div class="radio">
                         <label for="">
-                            <input type="radio" name="available" value="false" {{((!$product->available) ? 'checked':'')}}>No
+                            <input type="radio" name="available" value="0" {{((!$product->available) ? 'checked':'')}}>No
                         </label>
                     </div>
                 </div>
@@ -65,12 +65,12 @@
                     <label for="">Visible</label>
                     <div class="radio">
                         <label for="">
-                            <input type="radio" name="visible" value="true" {{(($product->visible) ? 'checked':'')}}>Sí
+                            <input type="radio" name="visible" value="1" {{(($product->visible) ? 'checked':'')}}>Sí
                         </label>
                     </div>
                     <div class="radio">
                         <label for="">
-                            <input type="radio" name="visible" value="false" {{((!$product->visible) ? 'checked':'')}}>No
+                            <input type="radio" name="visible" value="0" {{((!$product->visible) ? 'checked':'')}}>No
                         </label>
                     </div>
                 </div>
