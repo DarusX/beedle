@@ -17,11 +17,11 @@
             @foreach(Auth::user()->carts as $cart)
             <tr>
                 <td class="text-center">
-                    <a href="{{route('client.remove', $cart->id)}}" class="destroy">
-                        <i class="fas fa-trash"></i>
+                    <a href="{{route('client.remove', $cart->id)}}" class="btn btn-danger btn-xs destroy">
+                        <i class="fas fa-times"></i>
                     </a>
                 </td>
-                <td>{{$cart->product->product}} - {{$cart->color->color}}</td>
+                <td><a href="{{route('producto', $cart->product->id)}}">{{$cart->product->product}} - {{$cart->color->color}}</a></td>
                 <td>{{$cart->quantity}}</td>
                 <td>{{number_format($cart->product->price, 2)}}</td>
                 <td>{{number_format($cart->total, 2)}}</td>
@@ -43,11 +43,10 @@
 </div>
 <div class="col-sm-12">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-4 col-sm-offset-4">
             <div id="paypal-button" class="pull-right"></div>
         </div>
-        <div class="col-sm-12">
-
+        <div class="col-sm-4">
             <a href="{{route('client.generate.payment')}}" target="_blank" class="pull-right"><img src="{{asset('img/oxxopay_brand.png')}}" alt="" width="150px"></a>
         </div>
     </div>

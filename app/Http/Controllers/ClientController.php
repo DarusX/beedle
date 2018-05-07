@@ -38,9 +38,19 @@ class ClientController extends Controller
     }
     public function validateCode(Request $request)
     {
-        return Deal::with(['product' => function($x){
-            $x->with('colors');
-        }])->where('code', $request->code)->first();
+        
+        $carts = Cart::with(['product' => function($x) use($request){
+            $x->with('deal')->whereHas('deal', function($y) use ($request){
+                $y->whereRaw('BINARY code = ?', [$request->code]);
+            });
+        }])->where('user_id', Auth::id())->get();
+
+        if (count($carts)==0) {
+            return Deal::with(['product' => function($x){
+                $x->with('colors', 'photos');
+            }])->whereRaw('BINARY code = ?', [$request->code])->first();
+        } else {
+        }
     }
     public function generatePayment(Request $request)
     {

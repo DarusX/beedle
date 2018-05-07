@@ -50,14 +50,18 @@ function validateCode(){
             } else {
                 $("#modal-coupon").modal("toggle")
                 modalSelectColor(data)
-
             }
         }
     })
 }
 function modalSelectColor(data){
     $("#modal-select-color").modal("toggle")
-    $("#form-add-product").find("#producto").attr("value", data.product.product)
-    $("#form-add-product").find("#quantity").attr("value", data.quantity)
-    alert(JSON.stringify(data))
+    $("#deal-title").html(data.product.product)
+    $("#deal-quantity").val(data.quantity)
+    $("#deal-product_id").val(data.product.id)
+    $("#img-deal").attr("src", "/" + data.product.photos[0].photo);
+    $("#deal-color").empty();
+    $.each(data.product.colors, function(key, value){
+        $("#deal-color").append("<option value ='" + value.id +"'>" + value.color + "</option>")
+    })
 }

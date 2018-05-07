@@ -93,6 +93,7 @@
             <div class="modal-body">
                 <form action="" method="post" id="form-deal-code">
                     {{csrf_field()}}
+                   
                     <div class="form-group">
                         <label for="">Código</label>
                         <input type="text" name="code" class="form-control">
@@ -113,24 +114,31 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Seleccionar color</h4>
+                <h4 class="modal-title" id="deal-title"></h4>
             </div>
             <div class="modal-body">
-                <form action="{{route('client.add')}}" method="post" id="form-add-product">
-                    {{csrf_field()}}
-                    <div class="form-group">
-                        <label for="">Producto</label>
-                        <input type="text" id="producto" class="form-control" disabled>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <img src="" alt="" class="img-responsive" id="img-deal">
                     </div>
-                    <div class="form-group">
-                        <label for="">Cantidad</label>
-                        <input type="text" id="quantity" name="quantity" class="form-control" disabled>
+                    <div class="col-xs-8">
+                        <form action="{{route('client.add')}}" method="post" id="form-add-product">
+                            {{csrf_field()}}
+                            <input type="hidden" name="quantity" id="deal-quantity">
+                            <input type="hidden" name="product_id" id="deal-product_id">
+                            <div class="form-group">
+                                <label for="">Color</label>
+                                <select name="color_id" class="form-control" id="deal-color">
+
+                                </select>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="validateCode()">Aceptar</button>
+                <button type="button" class="btn btn-primary" onclick="$('#form-add-product').submit()">Aceptar</button>
             </div>
         </div>
     </div>
