@@ -105,7 +105,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::destroy($id);
     }
     public function colors(Request $request, $id)
     {

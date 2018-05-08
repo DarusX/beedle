@@ -1,8 +1,9 @@
 @extends('layouts.app') @section('css')
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> @endsection @section('content')
 <form action="{{route('deal.store')}}" method="post">
+    {{csrf_field()}}
+    <input type="hidden" name="visible" value="0">
     <div class="col-sm-4">
-        {{csrf_field()}}
         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
             <label for="" class="control-label">Categoría</label>
             <select name="category_id" class="form-control">

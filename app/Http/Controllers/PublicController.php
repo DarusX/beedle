@@ -13,9 +13,7 @@ class PublicController extends Controller
     {
         return view('brand')->with([
             'brand' => Brand::with(['products' => function($query){
-                $query->with(['photos' => function($query){
-                    $query->first();
-                }])->where('visible', true);
+                $query->with('photos')->where('visible', true);
             }])->where('brand', $brand)->first()
         ]);
     }

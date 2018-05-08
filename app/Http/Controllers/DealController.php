@@ -43,6 +43,17 @@ class DealController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'category_id' => 'required',
+            'brand_id' => 'required',
+            'product' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'deal' => 'required',
+            'code' => 'required',
+            'expiration' => 'required',
+            'quantity' => 'required',
+        ]);
         $deal = Product::create($request->all())->deal()->create($request->all());
         return redirect()->route('product.edit', $deal->product->id);
     }

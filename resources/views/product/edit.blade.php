@@ -95,9 +95,9 @@
     <div class="row">
         @foreach($product->photos->chunk(2) as $chunk)
             @foreach($chunk as $photo)
-            <div class="col-sm-6">
+            <div class="col-xs-6">
                 <img src="{{asset($photo->photo)}}" alt="" class="img-responsive img-thumbnail">
-                <a href="{{route('photo.destroy', $photo->id)}}" class="btn btn-danger btn-xs btn-block">
+                <a href="{{route('photo.destroy', $photo->id)}}" class="btn btn-danger btn-xs btn-block destroy">
                     <i class="fas fa-trash"></i>
                 </a>
             </div>

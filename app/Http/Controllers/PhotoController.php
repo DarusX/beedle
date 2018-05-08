@@ -84,6 +84,6 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Photo::destroy($id);
     }
 }

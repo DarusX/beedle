@@ -14,12 +14,11 @@ $(document).ready(function(){
     
     $(".destroy").click(function(){
         event.preventDefault();
-        $.post($(this).attr("href"), {
-            _method: "DELETE"
+        $.ajax({
+            url: $(this).attr("href"),
+            method: "DELETE"
         }).done(function(data){
-            location.reload();
-        }).catch(function(){
-            toastr.error("Error");
+            location.reload()
         })
     })
     $("#coupon-link").click(function(){
