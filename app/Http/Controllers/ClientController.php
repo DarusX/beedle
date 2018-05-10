@@ -67,7 +67,7 @@ class ClientController extends Controller
         Conekta::setApiVersion("2.0.0");
 
         try {
-            $order = \Conekta\Order::create([
+            return $order = \Conekta\Order::create([
                 'line_items' => $products,
                 'shipping_lines' => [[
                     'amount' => 0,
