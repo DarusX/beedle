@@ -12,6 +12,7 @@ use App\User;
 use Conekta\Conekta;
 use App\Deal;
 use App\Order;
+use App\Municipality;
 use DB;
 
 class ClientController extends Controller
@@ -48,12 +49,42 @@ class ClientController extends Controller
         ])->whereRaw('BINARY code = ?', [$request->code])->first();
 
     }
-    public function generatePayment(Request $request)
+
+    public function generateOrder(Request $request)
     {
+        $municipality =  Municipality::find($request->municipality_id);
         $order = Order::create([
             'user_id' => Auth::id(),
             'municipality_id' => 1,
-            'address' => 'Calle Falsa 123'
+            'address' => $request->address . ', ' . 
+            $municipality->municipality . ', ' . $municipality->state->state
+        ]);
+        foreach (Auth::user()->carts as $cart){
+            $order->products()->create([
+                'product_id' => $cart->product->id,
+                'color_id' => $cart->color->id,
+                'quantity' => $cart->quantity,
+                'price' => $cart->product->price
+            ]);
+        }
+        Auth::user()->carts()->delete();
+        
+        return redirect()->route('client.order', $order->id);
+    }
+
+    public function order($id)
+    {
+        return view('client.order')->with([
+            'order' => Order::find($id)
+        ]);
+    }
+    public function generatePayment(Request $request)
+    {
+        
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'municipality_id' => 1,
+            'address' => $request->address . ', ' . $municipality->municipality . ', ' . $municipality->state->state
         ]);
         foreach (Auth::user()->carts as $cart){
             $order->products()->create([

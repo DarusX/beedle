@@ -64,3 +64,33 @@ function modalSelectColor(data){
         $("#deal-color").append("<option value ='" + value.id +"'>" + value.color + "</option>")
     })
 }
+function modalAddress(){
+    $.ajax({
+        url: "/json/state/all",
+        success: function(data){
+            $("#state_id").empty();
+            $("#state_id").append($("<option></option>"));
+            $.each(data, function(key, value){
+                $("#state_id").append($("<option></option>").append(value.state).attr({
+                    value: value.id,
+                }));
+            })
+        }
+    })
+    $("#municipality_id").empty();
+    $("#modalAddress").modal("toggle");
+}
+function loadMunicipalities(){
+    $.ajax({
+        url: "/json/state/" + $("#state_id").val(),
+        success: function(data){
+            $("#municipality_id").empty();
+            $("#municipality_id").append($("<option></option>"));
+            $.each(data.municipalities, function(key, value){
+                $("#municipality_id").append($("<option></option>").append(value.municipality).attr({
+                    value: value.id,
+                }));
+            })
+        }
+    })
+}

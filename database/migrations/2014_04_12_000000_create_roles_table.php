@@ -22,7 +22,7 @@ class CreateRolesTable extends Migration
 
         Role::create(['role' => 'Adminstrador']);
         Role::create(['role' => 'Vendedor']);
-        Role::create(['role' => 'Comprador']);
+        Role::create(['role' => 'Cliente']);
     }
 
     /**
