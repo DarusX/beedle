@@ -11,6 +11,8 @@ use App\Cart;
 use App\User;
 use Conekta\Conekta;
 use App\Deal;
+use App\Order;
+use DB;
 
 class ClientController extends Controller
 {
@@ -39,22 +41,28 @@ class ClientController extends Controller
     public function validateCode(Request $request)
     {
         
-        $carts = Cart::with(['product' => function($x) use($request){
-            $x->with('deal')->whereHas('deal', function($y) use ($request){
-                $y->whereRaw('BINARY code = ?', [$request->code]);
-            });
-        }])->where('user_id', Auth::id())->get();
+        return Deal::with([
+            'product' => function($query){
+                $query->with('colors', 'photos');
+            }
+        ])->whereRaw('BINARY code = ?', [$request->code])->first();
 
-        if (count($carts)==0) {
-            return Deal::with(['product' => function($x){
-                $x->with('colors', 'photos');
-            }])->whereRaw('BINARY code = ?', [$request->code])->first();
-        } else {
-            return $carts;
-        }
     }
     public function generatePayment(Request $request)
     {
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'municipality_id' => 1,
+            'address' => 'Calle Falsa 123'
+        ]);
+        foreach (Auth::user()->carts as $cart){
+            $order->products()->create([
+                'product_id' => $cart->product->id,
+                'color_id' => $cart->color->id,
+                'quantity' => $cart->quantity,
+                'price' => $cart->product->price
+            ]);
+        }
         $products = [];
         $user = Auth::user();
         foreach (Auth::user()->carts as $cart) {
@@ -62,13 +70,15 @@ class ClientController extends Controller
                 'name' => $cart->product->product . ' - ' . $cart->color->color,
                 'unit_price' => $cart->product->price * 100,
                 'quantity' => $cart->quantity
-            ]);
+                ]
+            );
         }
+        Auth::user()->carts()->delete();
         Conekta::setApiKey("key_tKqskNzUHpQjoszXtcWAzw");
         Conekta::setApiVersion("2.0.0");
 
         try {
-            return $order = \Conekta\Order::create([
+            $conektaOrder = \Conekta\Order::create([
                 'line_items' => $products,
                 'shipping_lines' => [[
                     'amount' => 0,
@@ -78,8 +88,7 @@ class ClientController extends Controller
                 'customer_info' => [
                     'name' => $user->fullName,
                     'email' => $user->email,
-                    'phone' => '+5218181818181'
-    
+                    'phone' => '18181818181'
                 ],
                 'shipping_contact' => [
                     'address' => [
@@ -94,8 +103,10 @@ class ClientController extends Controller
                     ]
                 ]]
             ]);
+            $order->conekta_id = $conektaOrder->id;
+            $order->save();
             return view('client.payment')->with([
-                'order' => $order
+                'order' => $conektaOrder
             ]);
           } catch (\Conekta\ParameterValidationError $error){
             echo $error->getMessage();
