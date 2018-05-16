@@ -50,6 +50,7 @@ class ClientController extends Controller
                 $x->with('colors', 'photos');
             }])->whereRaw('BINARY code = ?', [$request->code])->first();
         } else {
+            return $carts;
         }
     }
     public function generatePayment(Request $request)

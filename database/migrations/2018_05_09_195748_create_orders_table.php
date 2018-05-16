@@ -19,9 +19,12 @@ class CreateOrdersTable extends Migration
             $table->string('conekta_id')->nullable();
             $table->string('paylpal_id')->nullable();
             $table->boolean('status')->default(0);
+            $table->integer('municipality_id')->unsigned()->nullable();
+            $table->text('address')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('municipality_id')->references('id')->on('municipalities');
         });
     }
 
