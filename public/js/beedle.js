@@ -98,3 +98,9 @@ function loadMunicipalities(){
 function resizeContainer(){
     $("#main").css("min-height", window.innerHeight);
 }
+$("#form-deal-code").keypress(function(){
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        validateCode()
+    }
+})

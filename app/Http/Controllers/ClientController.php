@@ -14,6 +14,7 @@ use App\Deal;
 use App\Order;
 use App\Municipality;
 use DB;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -46,7 +47,7 @@ class ClientController extends Controller
             'product' => function($query){
                 $query->with('colors', 'photos');
             }
-        ])->whereRaw('BINARY code = ?', [$request->code])->first();
+        ])->whereRaw('BINARY code = ?', [$request->code])->where('expiration', '>', Carbon::now())->first();
 
     }
 
