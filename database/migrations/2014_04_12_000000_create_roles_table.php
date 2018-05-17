@@ -19,10 +19,6 @@ class CreateRolesTable extends Migration
             $table->string('role');
             $table->timestamps();
         });
-
-        Role::create(['role' => 'Adminstrador']);
-        Role::create(['role' => 'Vendedor']);
-        Role::create(['role' => 'Cliente']);
     }
 
     /**

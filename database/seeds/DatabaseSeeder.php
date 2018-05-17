@@ -5,6 +5,7 @@ use App\State;
 use App\Color;
 use App\Brand;
 use App\Category;
+use App\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        Role::create(['role' => 'Adminstrador'])->users()->create([
+            'name' => 'Administrador',
+            'lastname' => 'Webby',
+            'email' => 'admin@webby.mx',
+            'password' => bcrypt('123456')
+        ]);
+        Role::create(['role' => 'Vendedor']);
+        Role::create(['role' => 'Cliente']);
+
         $colors = [
             ['color' => 'Rojo'],
             ['color' => 'Rosa'],

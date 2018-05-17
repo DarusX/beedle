@@ -51,9 +51,7 @@ Route::resources([
     'deal' => 'DealController'
 ]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PublicController@index');
 
 Auth::routes();
 

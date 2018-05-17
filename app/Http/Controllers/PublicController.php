@@ -9,6 +9,12 @@ use App\Product;
 
 class PublicController extends Controller
 {
+    public function index()
+    {
+        return view('index')->with([
+            'products' => Product::inRandomOrder()->limit(12)->get()
+        ]);
+    }
     public function brand($brand)
     {
         return view('brand')->with([
@@ -20,11 +26,9 @@ class PublicController extends Controller
     public function category($category)
     {
         return view('category')->with([
-            'category' => Category::with(['products' => function($q){
-                $q->with(['photos' => function($r){
-                    $r->first();
-                }]);
-            }])->where('brand', $category)->first()
+            'category' => Category::with(['products' => function($query){
+                $query->with('photos')->where('visible', true);
+            }])->where('category', $category)->first()
         ]);
     }
     public function product($id)

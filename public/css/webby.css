@@ -4,8 +4,18 @@ body{
     background-position-x: right;
     background-size: cover;
 }
-.container .row{
-    background-color: rgba(255, 255, 255, 0.7)
+.navbar{
+    margin-bottom: unset;
+}
+.navbar-brand{
+    padding-top: 10px;
+}
+#main{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding-top: 20px; 
+}
+#footer{
+    background: #ddd;
 }
 .modal-content{
     background-image: url("/webby/9345.png");
@@ -16,3 +26,11 @@ body{
 .modal-body{
     background: #fff;
 }
+.modal-backdrop.in{
+    opacity: 1;
+    background: #fff;
+    background-image: url("/webby/9345.png");
+    background-attachment: fixed;
+    background-position-x: right;
+    background-size: cover;
+ }

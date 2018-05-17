@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+    resizeContainer();
     $.ajaxSetup({
         headers:{
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') 
@@ -93,4 +94,7 @@ function loadMunicipalities(){
             })
         }
     })
+}
+function resizeContainer(){
+    $("#main").css("min-height", window.innerHeight);
 }
