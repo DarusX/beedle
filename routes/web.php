@@ -48,7 +48,8 @@ Route::resources([
     'photo' => 'PhotoController',
     'color' => 'ColorController',
     'state' => 'StateController',
-    'deal' => 'DealController'
+    'deal' => 'DealController',
+    'banner' => 'BannerController'
 ]);
 
 Route::get('/', 'PublicController@index');

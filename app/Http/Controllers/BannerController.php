@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
-use App\Brand;
-use App\Deal;
-use App\Product;
+use App\Banner;
 
-class DealController extends Controller
+class BannerController extends Controller
 {
     public function __construct()
     {
@@ -22,8 +19,8 @@ class DealController extends Controller
      */
     public function index()
     {
-        return view('deal.index')->with([
-            'deals' => Deal::all()
+        return view('banner.index')->with([
+            'banners' => Banner::all()
         ]);
     }
 
@@ -34,10 +31,7 @@ class DealController extends Controller
      */
     public function create()
     {
-        return view('deal.create')->with([
-            'categories' => Category::select('id', 'category')->get(),
-            'brands' => Brand::select('id', 'brand')->get(),
-        ]);
+        return view('banner.create');
     }
 
     /**
@@ -49,18 +43,16 @@ class DealController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'category_id' => 'required',
-            'brand_id' => 'required',
-            'product' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'deal' => 'required',
-            'code' => 'required',
-            'expiration' => 'required',
-            'quantity' => 'required',
+            'banner' => 'required',
+            'expiration' => 'required|date',
+            'page' => 'required|url'
         ]);
-        $deal = Product::create($request->all())->deal()->create($request->all());
-        return redirect()->route('product.edit', $deal->product->id);
+        Banner::create([
+            'banner' => $request->file('banner')->store('banners'),
+            'expiration' => $request->expiration,
+            'page' => $request->page
+        ]);
+        return redirect()->back();
     }
 
     /**
@@ -105,6 +97,6 @@ class DealController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Banner::destroy($id);
     }
 }
