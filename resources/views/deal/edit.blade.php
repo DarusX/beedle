@@ -37,7 +37,7 @@
             <input type="text" name="price" class="form-control" value="{{$product->price}}">
         </div>
         <div class="input-group">
-            <button class="btn btn-default">Aceptar</button>
+            <button class="btn btn-success">Aceptar</button>
         </div>
     </form>
 </div>
@@ -51,7 +51,7 @@
             <input type="file" name="photo" required>
         </div>
         <div class="form-group">
-            <button class="btn btn-default">Aceptar</button>
+            <button class="btn btn-success">Aceptar</button>
         </div>
     </form>
     <div class="row">
@@ -82,7 +82,7 @@
             @endforeach
         </div>
         <div class="form-group">
-            <button class="btn btn-default">Aceptar</button>
+            <button class="btn btn-success">Aceptar</button>
         </div>
     </form>
 </div>

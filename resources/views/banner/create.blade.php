@@ -19,7 +19,7 @@
             <input type="file" name="banner">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">Aceptar</button>
+            <button type="submit" class="btn btn-success">Aceptar</button>
         </div>
     </form>
 </div>

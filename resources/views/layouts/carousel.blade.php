@@ -6,7 +6,7 @@
             <div class="item {{ ($loop->first) ? 'active' : '' }}">
                 <img src="{{asset($a->banner)}}" alt="..." class="img-responsive">
                 <div class="carousel-caption">
-                    <a href="{{$a->page}}" class="btn btn-lg btn-success">@lang('button.buy')</a>
+                    <a href="{{$a->page}}" class="btn btn-lg btn-success">Comprar</a>
                 </div>
             </div>
             @endforeach

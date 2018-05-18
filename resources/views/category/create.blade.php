@@ -8,7 +8,7 @@
             <input type="text" name="category" class="form-control">
         </div>
         <div class="input-group">
-            <button class="btn btn-default">Aceptar</button>
+            <button class="btn btn-success">Aceptar</button>
         </div>
     </form>
 </div>

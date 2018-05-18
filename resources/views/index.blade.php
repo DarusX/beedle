@@ -47,18 +47,14 @@
 @foreach($products->chunk(4) as $chunk) @foreach($chunk as $product)
 <div class="col-sm-3">
 
-    <h3>{{$product->product}}</h3>
+    <h3 class="product-title">{{$product->product}}</h3>
     <a href="{{route('producto', $product->id)}}">
         <img src="{{asset($product->photos->first()->photo)}}" alt="" class="img-responsive thumbnail">
         <div class="row">
-            <div class="col-xs-6">
-                <h4>
+            <div class="col-xs-6 col-xs-offset-6">
+                <h3>
                     <strong>$ {{number_format($product->price, 2)}}</strong>
-                </h4>
-            </div>
-            <div class="col-xs-6">
-                <button class="btn btn-default btn-block">
-                    <i class="fas fa-plus"></i> Más</button>
+                </h3>
             </div>
         </div>
     </a>

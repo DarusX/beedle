@@ -100,8 +100,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="validateCode()">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="validateCode()"><i class="fas fa-check"></i> Aceptar</button>
             </div>
         </div>
     </div>
@@ -136,8 +136,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" onclick="$('#form-add-product').submit()">Aceptar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                <button type="button" class="btn btn-success" onclick="$('#form-add-product').submit()"><i class="fas fa-check"></i> Aceptar</button>
             </div>
         </div>
     </div>

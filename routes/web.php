@@ -18,8 +18,8 @@ Route::prefix('/cliente')->group(function(){
     Route::get('/carrito', 'ClientController@cart')->name('client.cart');
     Route::post('/cart/add', 'ClientController@addToCart')->name('client.add');
     Route::delete('/cart/{id}/remove', 'ClientController@removeFromCart')->name('client.remove');
-    Route::get('/generate/payment', 'ClientController@generatePayment')->name('client.generate.payment');
     Route::post('/order/generate', 'ClientController@generateOrder')->name('client.generate.order');
+    Route::get('/order/{id}/generate/payment', 'ClientController@generatePayment')->name('client.generate.payment');
     Route::post('/deal/validate', 'ClientController@validateCode')->name('deal.validate');
     Route::get('/order/{id}', 'ClientController@order')->name('client.order');
 });

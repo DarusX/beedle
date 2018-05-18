@@ -47,7 +47,7 @@ class ClientController extends Controller
             'product' => function($query){
                 $query->with('colors', 'photos');
             }
-        ])->whereRaw('BINARY code = ?', [$request->code])->where('expiration', '>', Carbon::now())->first();
+        ])->whereRaw('BINARY code = ?', [$request->code])->where('expiration', '>=', Carbon::now())->first();
 
     }
 
@@ -57,8 +57,7 @@ class ClientController extends Controller
         $order = Order::create([
             'user_id' => Auth::id(),
             'municipality_id' => 1,
-            'address' => $request->address . ', ' . 
-            $municipality->municipality . ', ' . $municipality->state->state
+            'address' => $request->street . ' ' . $request->number . ', ' . $request->colony . ', ' . $request->postal_code . ', ' . $request->city . ', ' . $municipality->municipality . ', ' . $municipality->state->state
         ]);
         foreach (Auth::user()->carts as $cart){
             $order->products()->create([
@@ -79,71 +78,72 @@ class ClientController extends Controller
             'order' => Order::find($id)
         ]);
     }
-    public function generatePayment(Request $request)
+    public function generatePayment($id)
     {
-        
-        $order = Order::create([
-            'user_id' => Auth::id(),
-            'municipality_id' => 1,
-            'address' => $request->address . ', ' . $municipality->municipality . ', ' . $municipality->state->state
-        ]);
-        foreach (Auth::user()->carts as $cart){
-            $order->products()->create([
-                'product_id' => $cart->product->id,
-                'color_id' => $cart->color->id,
-                'quantity' => $cart->quantity,
-                'price' => $cart->product->price
-            ]);
-        }
-        $products = [];
-        $user = Auth::user();
-        foreach (Auth::user()->carts as $cart) {
-            array_push($products, [
-                'name' => $cart->product->product . ' - ' . $cart->color->color,
-                'unit_price' => $cart->product->price * 100,
-                'quantity' => $cart->quantity
-                ]
-            );
-        }
-        Auth::user()->carts()->delete();
+        $order = Order::find($id);
         Conekta::setApiKey("key_tKqskNzUHpQjoszXtcWAzw");
         Conekta::setApiVersion("2.0.0");
-
-        try {
-            $conektaOrder = \Conekta\Order::create([
-                'line_items' => $products,
-                'shipping_lines' => [[
-                    'amount' => 0,
-                    'carrier' => 'FEDEX'
-                ]],
-                'currency' => 'MXN',
-                'customer_info' => [
-                    'name' => $user->fullName,
-                    'email' => $user->email,
-                    'phone' => '18181818181'
-                ],
-                'shipping_contact' => [
-                    'address' => [
-                        'street1' => 'Calle Falsa 123',
-                        'postal_code' => '86000',
-                        'country' => 'MX'
-                    ],
-                ],
-                'charges' => [[
-                    'payment_method' => [
-                        'type' => 'oxxo_cash'
+        
+        if ($order->conekta_id == null) 
+        {
+            $products = [];
+            $user = Auth::user();
+            foreach ($order->products as $product) {
+                array_push($products, [
+                    'name' => $product->product->product . ' - ' . $product->color->color,
+                    'unit_price' => $product->product->price * 100,
+                    'quantity' => $product->quantity
                     ]
-                ]]
-            ]);
-            $order->conekta_id = $conektaOrder->id;
-            $order->save();
+                );
+            }
+
+            try 
+            {
+                $conektaOrder = \Conekta\Order::create([
+                    'line_items' => $products,
+                    'shipping_lines' => [[
+                        'amount' => 0,
+                        'carrier' => 'FEDEX'
+                    ]],
+                    'currency' => 'MXN',
+                    'customer_info' => [
+                        'name' => $user->fullName,
+                        'email' => $user->email,
+                        'phone' => '18181818181'
+                    ],
+                    'shipping_contact' => [
+                        'address' => [
+                            'street1' => 'Calle Falsa 123',
+                            'postal_code' => '86000',
+                            'country' => 'MX'
+                        ],
+                    ],
+                    'charges' => [[
+                        'payment_method' => [
+                            'type' => 'oxxo_cash'
+                        ]
+                    ]]
+                ]);
+                $order->conekta_id = $conektaOrder->id;
+                $order->save();
+                return view('client.payment')->with([
+                    'order' => $conektaOrder
+                ]);
+            } 
+            catch (\Conekta\ParameterValidationError $error)
+            {
+                echo $error->getMessage();
+            } 
+            catch (\Conekta\Handler $error)
+            {
+                echo $error->getMessage();
+            }
+        } 
+        else 
+        {
             return view('client.payment')->with([
-                'order' => $conektaOrder
+                'order' => \Conekta\Order::find($order->conekta_id)
             ]);
-          } catch (\Conekta\ParameterValidationError $error){
-            echo $error->getMessage();
-          } catch (\Conekta\Handler $error){
-            echo $error->getMessage();
-          }
+        }
     }
 }

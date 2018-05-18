@@ -33,7 +33,7 @@
             <input type="text" name="price" class="form-control" value="{{old('price')}}">
         </div>
         <div class="input-group">
-            <button class="btn btn-default">Aceptar</button>
+            <button class="btn btn-success">Aceptar</button>
         </div>
     </div>
     <div class="col-sm-4">

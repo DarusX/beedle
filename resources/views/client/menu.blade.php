@@ -15,10 +15,10 @@
         <tbody>
             @foreach(Auth::user()->orders as $order)
             <tr>
-                <th><a href="{{route('client.order', $order->id)}}" class="btn btn-xs btn-default"><i class="fas fa-plus"></i></a></th>
+                <th><a href="{{route('client.order', $order->id)}}" class="btn btn-xs btn-success"><i class="fas fa-plus"></i></a></th>
                 <td>{{$order->id}}</td>
                 <td>{{$order->updated_at}}</td>
-                <td>{{number_format($order->products->sum('total'), 2)}}</td>
+                <td>$ {{number_format($order->products->sum('total'), 2)}}</td>
             </tr>
             @endforeach
         </tbody>
