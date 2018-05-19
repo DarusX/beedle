@@ -20,6 +20,10 @@
                 <td>{{$d->product->product}}</td>
                 <td>{{$d->code}}</td>
                 <td>{{$d->expiration}}</td>
+                <td>
+                    <a href="{{route('deal.edit', $d)}}" class="btn btn-default btn-xs"><i class="fas fa-pencil-alt"></i></a>
+                    <a href="{{route('deal.destroy', $d)}}" class="btn btn-danger btn-xs destroy"><i class="fas fa-times"></i></a>
+                </td>
             </tr>
             @endforeach 
         </tbody>

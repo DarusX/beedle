@@ -83,7 +83,9 @@ class DealController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('deal.edit')->with([
+            'deal' => Deal::find($id)
+        ]);
     }
 
     /**
@@ -95,7 +97,15 @@ class DealController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'deal' => 'required',
+            'code' => 'required',
+            'expiration' => 'required',
+            'quantity' => 'required',
+        ]);
+        Deal::find($id)->update($request->all());
+        \Session::flash('success', '');
+        return redirect()->back();
     }
 
     /**
@@ -106,6 +116,6 @@ class DealController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Deaal::destroy($id);
     }
 }

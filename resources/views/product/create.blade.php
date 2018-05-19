@@ -1,7 +1,9 @@
 @extends('layouts.app')
 @section('content')
 @include('administrator.menu')
-@include('administrator.menu')
+<div class="col-sm-12">
+    <h1><strong>Producto</strong></h1>
+</div>
 <div class="col-sm-6">
     <form action="{{route('product.store')}}" method="post">
         {{csrf_field()}}

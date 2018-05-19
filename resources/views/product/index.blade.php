@@ -15,9 +15,9 @@
             <tr>
                 <td>{{$p->product}}</td>
                 <td>
-                    <a href="" class="btn btn-warning btn-xs"><i class="fas fa-toggle-{{($p->available) ? 'on' : 'off'}}"></i></a>
-                    <a href="" class="btn btn-warning btn-xs"><i class="fas fa-eye{{($p->visible) ? '' : '-slash'}}"></i></a>
-                    <a href="{{route('product.edit', $p->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
+                    <a href="" class="btn btn-default btn-xs disabled"><i class="fas fa-toggle-{{($p->available) ? 'on' : 'off'}}"></i></a>
+                    <a href="" class="btn btn-default btn-xs disabled"><i class="fas fa-eye{{($p->visible) ? '' : '-slash'}}"></i></a>
+                    <a href="{{route('product.edit', $p->id)}}" class="btn btn-default btn-xs"><i class="fas fa-edit"></i></a>
                     <a href="{{route('product.destroy', $p->id)}}" class="btn btn-danger btn-xs destroy"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>

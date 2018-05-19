@@ -60,6 +60,9 @@
                     @if(!Auth::guest() && $product->visible && $product->available)
                     <button type="submit" class="btn btn-success"><i class="fas fa-cart-plus"></i> Añadir</button>
                     @endif
+                    @if(Auth::guest())
+                    <p><a href="{{route('login')}}">Inicia sesión</a> o <a href="{{route('register')}}">Registrate</a> para continuar</p>
+                    @endif
                 </div>
             </form>
         </div>

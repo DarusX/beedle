@@ -2,10 +2,10 @@
 @section('content')
 @include('administrator.menu')
 <div class="col-sm-12">
-    <h1>Producto</h1>
+    <h1><strong>Producto</strong></h1>
 </div>
 <div class="col-sm-4">
-    <h2>Características</h2>
+    <legend>Características</legend>
     <form action="{{route('product.update', $product->id)}}" method="post">
         {{csrf_field()}}
         {{method_field('PUT')}}
@@ -45,7 +45,7 @@
 <div class="col-sm-4">
     <div class="row">
         <div class="col-sm-12">
-            <h2>Opciones</h2>
+            <legend>Opciones</legend>
             <form action="{{route('product.update', $product->id)}}" method="post">
                 {{csrf_field()}}
                 {{method_field('PUT')}}
@@ -81,7 +81,7 @@
             </form>
         </div>
     </div>
-    <h2>Fotos</h2>
+    <legend>Fotos</legend>
     <form action="{{route('photo.store')}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <input type="hidden" name="product_id" value="{{$product->id}}">
@@ -109,7 +109,7 @@
     </div>
 </div>
 <div class="col-sm-4">
-    <h2>Colores</h2>
+    <legend>Colores</legend>
     <form action="{{route('product.colors', $product->id)}}" method="post">
         <div class="form-group">
             {{csrf_field()}}

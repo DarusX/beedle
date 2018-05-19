@@ -15,7 +15,7 @@
             <tr>
                 <td>{{$c->category}}</td>
                 <td>
-                    <a href="{{route('category.edit', $c->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
+                    <a href="{{route('category.edit', $c->id)}}" class="btn btn-default btn-xs"><i class="fas fa-edit"></i></a>
                     <a href="{{route('category.destroy', $c->id)}}" class="btn btn-danger btn-xs destroy"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>

@@ -19,7 +19,7 @@
                 <td>{{$b->expiration}}</td>
                 <td><a href="{{$b->page}}">{{$b->page}}</a></td>
                 <td>
-                    <a href="{{route('banner.edit', $b->id)}}" class="btn btn-warning btn-xs"><i class="fas fa-edit"></i></a>
+                    <a href="{{route('banner.edit', $b->id)}}" class="btn btn-default btn-xs"><i class="fas fa-edit"></i></a>
                     <a href="{{route('banner.destroy', $b->id)}}" class="btn btn-danger btn-xs destroy"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>

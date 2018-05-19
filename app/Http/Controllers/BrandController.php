@@ -70,7 +70,9 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('brand.edit')->with([
+            'brand' => Brand::find($id)
+        ]);
     }
 
     /**
@@ -82,7 +84,12 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'brand' => 'required'
+        ]);
+        Brand::find($id)->update($request->all());
+        \Session::flash('success', '');
+        return redirect()->back();
     }
 
     /**
@@ -93,10 +100,6 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        try{
-            Brand::destroy($id);
-        } catch(QueryException $e){
-            abort(500, $e->getMessage());
-        }
-    }
+        Brand::destroy($id);
+     }
 }

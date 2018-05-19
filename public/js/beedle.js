@@ -20,6 +20,8 @@ $(document).ready(function(){
             method: "DELETE"
         }).done(function(data){
             location.reload()
+        }).error(function(data){
+            toastr.error("No se pudo eliminar")
         })
     })
     $("#coupon-link").click(function(){

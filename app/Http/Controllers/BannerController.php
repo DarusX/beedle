@@ -75,7 +75,9 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('banner.edit')->with([
+            'banner' => Banner::find($id)
+        ]);
     }
 
     /**
@@ -87,7 +89,18 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'banner' => 'required',
+            'expiration' => 'required|date',
+            'page' => 'required|url'
+        ]);
+        Banner::find($id)->update([
+            'banner' => $request->file('banner')->store('banners'),
+            'expiration' => $request->expiration,
+            'page' => $request->page
+        ]);
+        \Session::flash('success', '');
+        return redirect()->back();
     }
 
     /**

@@ -4,10 +4,14 @@
 @endsection 
 @section('content')
 @include('administrator.menu')
+<div class="col-sm-12">
+    <h1><strong>Oferta</strong></h1>
+</div>
 <form action="{{route('deal.store')}}" method="post">
     {{csrf_field()}}
     <input type="hidden" name="visible" value="0">
     <div class="col-sm-4">
+        <legend>Producto</legend>
         <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
             <label for="" class="control-label">Categoría</label>
             <select name="category_id" class="form-control">
@@ -41,24 +45,23 @@
         </div>
     </div>
     <div class="col-sm-4">
-        <form action="{{route('deal.store')}}" method="post" enctype="multipart/form-data">
-            <div class="form-group{{ $errors->has('deal') ? ' has-error' : '' }}">
-                <label for="" class="control-label">Oferta</label>
-                <input type="text" name="deal" class="form-control">
-            </div>
-            <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
-                <label for="" class="control-label">Código</label>
-                <input type="text" name="code" class="form-control">
-            </div>
-            <div class="form-group{{ $errors->has('expiration') ? ' has-error' : '' }}">
-                <label for="" class="control-label">Expiración</label>
-                <input type="text" name="expiration" class="form-control">
-            </div>
-            <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
-                <label for="" class="control-label">Cantidad</label>
-                <input type="text" name="quantity" class="form-control">
-            </div>
-        </form>
+    <legend>Oferta</legend>
+        <div class="form-group{{ $errors->has('deal') ? ' has-error' : '' }}">
+            <label for="" class="control-label">Oferta</label>
+            <input type="text" name="deal" class="form-control">
+        </div>
+        <div class="form-group{{ $errors->has('code') ? ' has-error' : '' }}">
+            <label for="" class="control-label">Código</label>
+            <input type="text" name="code" class="form-control">
+        </div>
+        <div class="form-group{{ $errors->has('expiration') ? ' has-error' : '' }}">
+            <label for="" class="control-label">Expiración</label>
+            <input type="text" name="expiration" class="form-control">
+        </div>
+        <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
+            <label for="" class="control-label">Cantidad</label>
+            <input type="text" name="quantity" class="form-control">
+        </div>
     </div>
 </form>
 @endsection @section('scripts')

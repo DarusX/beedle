@@ -15,6 +15,11 @@ class AdministrartorMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if($request->user()->role->role != 'Administrador'){
+            \Session::flash('danger', 'Usuario no autorizado');
+            return redirect('home');
+        }
+
         return $next($request);
     }
 }

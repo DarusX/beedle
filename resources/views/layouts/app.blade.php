@@ -42,6 +42,14 @@
     <script src="{{ asset('js/toastr.min.js') }}"></script>
     <script src="{{ asset('js/beedle.js') }}"></script>
     <script src="{{ asset('js/webby.js') }}"></script>
+    <script>
+        toastr.options = {
+            positionClass: "toast-bottom-right",
+            timeOut: 5000,
+            closeButton: true,
+            progressBar: true
+        }
+    </script>
     @foreach($errors->all() as $e)
     <script>
         toastr.error("{{$e}}")
@@ -50,6 +58,11 @@
     @if(Session::has('success'))
     <script>
         toastr.success("Datos guardados");
+    </script>
+    @endif
+    @if(Session::has('danger'))
+    <script>
+        toastr.error("{{Session::get('danger')}}");
     </script>
     @endif
     @yield('scripts')

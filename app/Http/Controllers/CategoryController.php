@@ -70,7 +70,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('category.edit')->with([
+            'category' => Category::find($id)
+        ]);
     }
 
     /**
@@ -82,7 +84,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'category' => 'required'
+        ]);
+        Category::find($id)->update($request->all());
+        \Session::flash('success', '');
+        return redirect()->back();
     }
 
     /**

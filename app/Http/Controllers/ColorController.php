@@ -19,7 +19,9 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        return view('color.index')->with([
+            'colors' => Color::all()
+        ]);
     }
 
     /**
@@ -68,7 +70,9 @@ class ColorController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('color.edit')->with([
+            'color' => Color::find($id)
+        ]);
     }
 
     /**
@@ -80,7 +84,13 @@ class ColorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'color' => 'required',
+            'hcolor' => 'required'
+        ]);
+        Color::find($id)->update($request->all());
+        \Session::flash('success', '');
+        return redirect()->back();
     }
 
     /**
