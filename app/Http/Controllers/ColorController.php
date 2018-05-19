@@ -45,6 +45,7 @@ class ColorController extends Controller
             'hcolor' => 'sometimes'
         ]);
         Color::create($request->all());
+        \Session::flash('success', '');
         return redirect()->back();
     }
 

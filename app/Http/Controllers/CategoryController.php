@@ -47,6 +47,7 @@ class CategoryController extends Controller
             'category' => 'required|string'
         ]);
         Category::create($request->all());
+        \Session::flash('success', '');
         return redirect()->back();
     }
 

@@ -1,4 +1,5 @@
-@extends('layouts.app') @section('content')
+@extends('layouts.app') 
+@section('content')
 <div class="col-sm-12">
     <h1><strong>{{$brand->brand}}</strong></h1>
 </div>

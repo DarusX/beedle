@@ -46,6 +46,7 @@ class BrandController extends Controller
         $this->validate($request, [
             'brand' => 'required|string'
         ]);
+        \Session::flash('success', '');
         brand::create($request->all());
         return redirect()->back();
     }

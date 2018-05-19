@@ -44,6 +44,7 @@ class PhotoController extends Controller
             'product_id' => $request->product_id,
             'photo' => $request->file('photo')->store('photos')
         ]);
+        \Session::flash('success', '');
         return redirect()->back();
     }
 

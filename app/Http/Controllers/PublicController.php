@@ -13,7 +13,7 @@ class PublicController extends Controller
     public function index()
     {
         return view('index')->with([
-            'products' => Product::inRandomOrder()->limit(12)->get(),
+            'products' => Product::doesntHave('deal')->inRandomOrder()->limit(12)->get(),
             'banners' => Banner::active()->get()
         ]);
     }

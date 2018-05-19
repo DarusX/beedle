@@ -47,6 +47,11 @@
         toastr.error("{{$e}}")
     </script>
     @endforeach
+    @if(Session::has('success'))
+    <script>
+        toastr.success("Datos guardados");
+    </script>
+    @endif
     @yield('scripts')
 </body>
 

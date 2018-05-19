@@ -60,6 +60,7 @@ class DealController extends Controller
             'quantity' => 'required',
         ]);
         $deal = Product::create($request->all())->deal()->create($request->all());
+        \Session::flash('success', '');
         return redirect()->route('product.edit', $deal->product->id);
     }
 

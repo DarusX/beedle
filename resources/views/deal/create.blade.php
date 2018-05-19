@@ -1,5 +1,9 @@
-@extends('layouts.app') @section('css')
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> @endsection @section('content')
+@extends('layouts.app') 
+@section('css')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
+@endsection 
+@section('content')
+@include('administrator.menu')
 <form action="{{route('deal.store')}}" method="post">
     {{csrf_field()}}
     <input type="hidden" name="visible" value="0">

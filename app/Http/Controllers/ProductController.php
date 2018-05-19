@@ -54,6 +54,7 @@ class ProductController extends Controller
             'price' => 'required|numeric'
         ]);
         $product = Product::create($request->all());
+        \Session::flash('success', '');
         return redirect()->route('product.edit', $product->id);
     }
 
@@ -94,6 +95,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         Product::find($id)->update($request->all());
+        \Session::flash('success', '');
         return redirect()->back();
     }
 
@@ -110,6 +112,7 @@ class ProductController extends Controller
     public function colors(Request $request, $id)
     {
         Product::find($id)->colors()->sync($request->color_id);
+        \Session::flash('success', '');
         return redirect()->back();
     }
 }

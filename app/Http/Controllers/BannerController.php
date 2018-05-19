@@ -52,6 +52,7 @@ class BannerController extends Controller
             'expiration' => $request->expiration,
             'page' => $request->page
         ]);
+        \Session::flash('success', '');
         return redirect()->back();
     }
 

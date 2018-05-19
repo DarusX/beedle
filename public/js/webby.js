@@ -1,4 +1,4 @@
-$(".navbar-brand").append($("<img>").attr({
+$(".navbar-brand").first().append($("<img>").attr({
     src: "/webby/brand.png"
 }));
 $("head").append($("<link>").attr({

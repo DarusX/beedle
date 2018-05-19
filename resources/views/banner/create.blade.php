@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 @endsection
 @section('content')
+@include('administrator.menu')
 <div class="col-sm-6">
     <form action="{{route('banner.store')}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}

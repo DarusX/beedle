@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('administrator.menu')
 <div class="col-sm-12">
     <h1><strong>Categorías</strong></h1>
     <table class="table">
