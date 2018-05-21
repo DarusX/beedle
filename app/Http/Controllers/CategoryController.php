@@ -18,7 +18,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return view('category.index')->with([
             'categories' => Category::paginate(20)
@@ -100,6 +100,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Brand::destroy($id);
+        Category::destroy($id);
     }
 }

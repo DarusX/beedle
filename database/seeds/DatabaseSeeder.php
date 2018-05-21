@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
-        Role::create(['role' => 'Adminstrador'])->users()->create([
+        Role::create(['role' => 'Administrador'])->users()->create([
             'name' => 'Administrador',
             'lastname' => 'Webby',
             'email' => 'admin@webby.mx',
