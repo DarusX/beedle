@@ -26,9 +26,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <form class="navbar-form navbar-left">
+                                    <form action="{{route('admin.orders.search')}}" class="navbar-form navbar-left" method="GET">
                                         <div class="input-group">
-                                            <input type="text" class="form-control input-sm">
+                                            <input type="text" class="form-control input-sm" name="id">
                                             <span class="input-group-btn">
                                               <button class="btn btn-default btn-sm" type="button"><i class="fas fa-search"></i></button>
                                             </span>
@@ -36,9 +36,8 @@
                                     </form>
                                 </li>
                                 <li>
-                                    <a href="{{route('banner.create')}}">Pendientes</a>
-                                    <a href="{{route('banner.create')}}">Pagadas</a>
-                                    <a href="{{route('banner.create')}}">Enviadas</a>
+                                    <a href="{{route('admin.orders.pending')}}">Pendientes</a>
+                                    <a href="{{route('admin.orders.paid')}}">Pagadas</a>
                                 </li>
                             </ul>
                         </li>

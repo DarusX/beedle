@@ -19,4 +19,16 @@ class Order extends Model
     {
         return $this->hasMany(OrderProduct::class);
     }
+
+    public function getEstadoAttribute()
+    {
+        switch ($this->status) {
+            case 0:
+                return 'Pendiente';
+            break;
+            case 1:
+                return 'Pagado';
+            break;
+        }
+    }
 }

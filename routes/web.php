@@ -19,9 +19,16 @@ Route::prefix('/cliente')->group(function(){
     Route::post('/cart/add', 'ClientController@addToCart')->name('client.add');
     Route::delete('/cart/{id}/remove', 'ClientController@removeFromCart')->name('client.remove');
     Route::post('/order/generate', 'ClientController@generateOrder')->name('client.generate.order');
+    Route::post('/order/pay', 'ClientController@payOrder')->name('client.pay.order');
     Route::get('/order/{id}/generate/payment', 'ClientController@generatePayment')->name('client.generate.payment');
     Route::post('/deal/validate', 'ClientController@validateCode')->name('deal.validate');
     Route::get('/order/{id}', 'ClientController@order')->name('client.order');
+});
+
+Route::prefix('/administrador')->group(function(){
+    Route::get('orders/paid', 'AdministratorController@paidOrders')->name('admin.orders.paid');
+    Route::get('orders/pending', 'AdministratorController@pendingOrders')->name('admin.orders.pending');
+    Route::get('orders/search', 'AdministratorController@searchOrders')->name('admin.orders.search');
 });
 
 Route::prefix('json')->group(function(){

@@ -1,9 +1,9 @@
 @extends('layouts.app') @section('content')
 <div class="col-sm-12">
-    <h1>Orden #{{$order->id}}</h1>
+    <h1><strong>Orden #{{$order->id}}</strong></h1>
 </div>
 <div class="col-sm-8">
-    <h2>Productos</h2>
+    <legend>Productos</legend>
     <table class="table">
         <thead>
             <tr>
@@ -18,8 +18,8 @@
             <tr>
                 <td>{{$product->quantity}}</td>
                 <td>{{$product->product->product}} - {{$product->color->color}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{number_format($product->total,2)}}</td>
+                <td>$ {{number_format($product->price, 2)}}</td>
+                <td>$ {{number_format($product->total,2)}}</td>
             </tr>
             @endforeach
         </tbody>
@@ -28,20 +28,21 @@
                 <td></td>
                 <td></td>
                 <td><strong>Total: </strong></td>
-                <td>{{$order->products->sum('total')}}</td>
+                <td>$ {{number_format($order->products->sum('total'), 2)}}</td>
             </tr>
         </tfoot>
     </table>
 </div>
 <div class="col-sm-4">
-    <h2>Envío</h2>
+    <legend>Envío</legend>
     <p>{{$order->address}}</p>
 </div>
 <div class="col-sm-12"></div>
 <div class="col-sm-4">
-    <h2>Pago</h2>
-    <p><strong>Estatus: </strong>Pendiente</p>
+    <legend>Pago</legend>
+    <p><strong>Estatus: </strong>{{$order->estado}}</p>
     <div class="col-sm-12">
+        @if($order->status==0)
         <div class="row">
             <div class="col-sm-6">
                 <div id="paypal-button" class="pull-right"></div>
@@ -52,6 +53,7 @@
                 </a>
             </div>
         </div>
+        @endif
     </div>
 </div>
 @endsection

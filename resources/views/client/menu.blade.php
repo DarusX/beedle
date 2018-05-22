@@ -10,6 +10,7 @@
                 <th>Órden</th>
                 <th>Fecha/Hora</th>
                 <th>Total</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,7 @@
                 <td>{{$order->id}}</td>
                 <td>{{$order->updated_at}}</td>
                 <td>$ {{number_format($order->products->sum('total'), 2)}}</td>
+                <td>{{$order->estado}}</td>
             </tr>
             @endforeach
         </tbody>
