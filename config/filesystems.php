@@ -45,7 +45,8 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => base_path() . '/public',
+            //'root' => base_path() . '/public',
+            'root' => '../webby.mx/',
         ],
 
         'public' => [

@@ -43,6 +43,7 @@ body{
      border-left: 4px solid #87c440;
      padding-left: 12px;
      font-weight: bold;
+     min-height: 60px;
  }
  .price{
      font-weight: bold;

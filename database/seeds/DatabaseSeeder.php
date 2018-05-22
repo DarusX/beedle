@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         ]);
         Role::create(['role' => 'Vendedor']);
         Role::create(['role' => 'Cliente']);
-
+        /*
         $colors = [
             ['color' => 'Rojo'],
             ['color' => 'Rosa'],
@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
         Category::create([
             'category' => 'Fundas' 
         ]);
+        */
         State::create([
            'state' => 'Aguascalientes'
         ])->municipalities()->createMany([
