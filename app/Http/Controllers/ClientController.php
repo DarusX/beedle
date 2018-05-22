@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 require_once(app_path().'\Libraries\Conekta\Conekta.php');
+//require_once(app_path().'/Libraries/Conekta/Conekta.php');
 
 use Illuminate\Http\Request;
 use Auth;
