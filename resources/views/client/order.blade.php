@@ -47,11 +47,13 @@
             <div class="col-sm-6">
                 <div id="paypal-button" class="pull-right"></div>
             </div>
-            <div class="col-sm-6">
-                <a href="{{route('client.generate.payment', $order->id)}}" target="_blank" class="pull-right">
-                    <img src="{{asset('img/oxxopay_brand.png')}}" alt="" width="150px">
-                </a>
-            </div>
+            {{--
+                <div class="col-sm-6">
+                    <a href="{{route('client.generate.payment', $order->id)}}" target="_blank" class="pull-right">
+                        <img src="{{asset('img/oxxopay_brand.png')}}" alt="" width="150px">
+                    </a>
+                </div>
+            --}}
         </div>
         @endif
     </div>
@@ -91,9 +93,7 @@
         },
 
         onCancel: function (data, actions) {
-            /* 
-             * Buyer cancelled the payment 
-             */
+            toastr.warning("Pago cancelado")
         },
 
         onError: function (err) {
@@ -101,15 +101,17 @@
     }, '#paypal-button');
     function paid() {
         $.ajax({
-            url: "",
+            url: "/cliente/order/pay",
             method: "POST",
             data: {
-                _method: "PUT",
-                _token: "{{csrf_token()}}",
-                status_id: 2
+                id: "{{$order->id}}",
+                status: 1
             },
             success: function (data) {
-                location.reload;
+                toastr.options.onHidden = function() {
+                    location.reload()
+                }
+                toastr.success("Pago exitoso")
             }
         });
     }

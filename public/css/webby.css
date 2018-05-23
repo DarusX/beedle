@@ -72,3 +72,6 @@ body{
  .navbar-success .navbar-nav>li>a{
      color: #fff;
  }
+ .panel-title>a:hover, .panel-title>a:active, .panel-title>a:focus{
+    text-decoration: unset;
+ }

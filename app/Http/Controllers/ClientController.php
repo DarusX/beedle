@@ -147,4 +147,10 @@ class ClientController extends Controller
             ]);
         }
     }
+    public function payOrder(Request $request)
+    {
+        Order::find($request->id)->update([
+            'status' => $request->status
+        ]);
+    }
 }

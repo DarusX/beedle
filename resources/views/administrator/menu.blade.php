@@ -30,7 +30,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control input-sm" name="id">
                                             <span class="input-group-btn">
-                                              <button class="btn btn-default btn-sm" type="button"><i class="fas fa-search"></i></button>
+                                              <button class="btn btn-default btn-sm" type="submit"><i class="fas fa-search"></i></button>
                                             </span>
                                           </div>
                                     </form>
